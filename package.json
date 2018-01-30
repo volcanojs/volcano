@@ -1,15 +1,15 @@
 {
-  "name": "flame",
-  "description": "A Firebase replacement with Feathers.js and other thingys.",
+  "name": "volcano",
+  "description": "A Firebase replacement with Feathers.js and other good stuff.",
   "version": "0.0.0",
-  "homepage": "",
+  "homepage": "https://github.com/wildfirejs/volcano",
   "main": "src",
   "keywords": [
     "feathers"
   ],
   "author": {
     "name": "Kang Cheng",
-    "email": "kcheng@utilitywarehouse.co.uk"
+    "email": "me@chengkang.pw"
   },
   "contributors": [],
   "bugs": {},

@@ -1,6 +1,6 @@
-# flame
+# volcano
 
-> A Firebase replacement with Feathers.js and other thingys.
+> A Firebase replacement with Feathers.js and other good stuff.
 
 ## About
 
