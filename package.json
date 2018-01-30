@@ -39,6 +39,7 @@
     "helmet": "^3.10.0",
     "nedb": "^1.8.0",
     "serve-favicon": "^2.4.5",
+    "targaryen": "^3.0.5",
     "winston": "^2.4.0"
   },
   "devDependencies": {
