@@ -43,22 +43,19 @@ module.exports = class DynamicService {
     return await service.remove(id, params);
   }
 
-  getService(name) {
+  async getService(name) {
     if(!this.app.service(name)) {
-      createWithTemplate(this.app, name);
+      await createWithTemplate(this.app, name);
     }
-    return new Promise((resolve, reject) => {
-      if (!this._services[name]) {
-        // TODO: check if exist before create
-        this.app.service('_services').create({ name })
-          .then(_service => {
-            this._services[name] = _service;
-            return resolve(this.app.service(name));
-          })
-          .catch(error => reject(error));
-      } else {
-        return resolve(this.app.service(name));
-      }
-    });
+    
+    if (!this._services[name]) {
+      // TODO: check if exist before create
+      const _service = await this.app.service('_services').create({ name });
+
+      this._services[name] = _service;
+      return this.app.service(name);
+    } else {
+      return this.app.service(name);
+    }
   }
 };
