@@ -1,5 +1,11 @@
 const createWithTemplate = require('./template/template.service.js');
 
+const VOLCANO_ACTION = {
+  OFF: 'off',
+  ON: 'on',
+  ONCE: 'once',
+};
+
 // eslint-disable-next-line no-unused-vars
 module.exports = class DynamicService {
   constructor (app, _services) {
@@ -8,38 +14,46 @@ module.exports = class DynamicService {
     this._services = _services;
   }
   async find(params) {
-    const { modelName } = params.route;
-    const service = await this.getService(modelName);
+    console.log(params);
+    const service = await this.getService(params.query.modelName);
+    delete params.query.modelName;
     return await service.find(params);
   }
 
   async get(id, params) {
-    const { modelName } = params.route;
-    const service = await this.getService(modelName);
+    console.log(params);
+    const service = await this.getService(params.query.modelName);
+    delete params.query.modelName;
     return await service.get(id, params);
   }
 
   async create(data, params) {
-    const { modelName } = params.route;
-    const service = await this.getService(modelName);
+    const service = await this.getService(params.query.modelName);
+    delete params.query.modelName;
     return await service.create(data, params);
   }
 
   async update(id, data, params) {
-    const { modelName } = params.route;
-    const service = await this.getService(modelName);
-    return await service.update(id, data, params);
+    const service = await this.getService(params.query.modelName);
+    delete params.query.modelName;
+    const _volcano = Object.assign({}, params.query._volcano);
+    delete params.query._volcano;
+    if (_volcano.action) {
+      return await service[`v_${_volcano.action}`](params, _volcano);
+    } else {
+      return await service.update(id, data, params);
+    }
   }
 
   async patch(id, data, params) {
-    const { modelName } = params.route;
-    const service = await this.getService(modelName);
+    const service = await this.getService(params.query.modelName);
+    delete params.query.modelName;
     return await service.patch(id, data, params);
   }
 
   async remove(id, params) {
-    const { modelName } = params.route;
-    const service = await this.getService(modelName);
+    const service = await this.getService(params.query.modelName);
+    delete params.query.modelName;
     return await service.remove(id, params);
   }
 

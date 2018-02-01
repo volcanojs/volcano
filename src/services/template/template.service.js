@@ -1,5 +1,5 @@
 // Initializes the `template` service on path `/_template`
-const createService = require('../../libs/feathers-mongodb/lib');
+const createService = require('../../packages/feathers-mongodb/lib');
 const hooks = require('./template.hooks');
 
 module.exports = function (app, modelName) {

@@ -11,7 +11,8 @@ module.exports = function (app) {
               const _service = _services[i];
               _servicesObject[_service.name] = _service;
             }
-            app.use('/d/:modelName', new DynamicService(app, _servicesObject));
+            app.use('/d', new DynamicService(app, _servicesObject));
+            console.log(Object.keys(app.services))
             return resolve();
           });
       })
